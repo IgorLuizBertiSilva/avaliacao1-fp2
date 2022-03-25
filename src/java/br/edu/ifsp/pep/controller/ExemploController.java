@@ -178,6 +178,14 @@ public class ExemploController implements Serializable {
 //            System.out.println("Nome na lista: " + p.getNome());
 //        }
     }
+    
+    public String forCadastro(){
+        return "cadastro";
+    }
+    
+    public String forLista(){
+        return "lista";
+    }
 
     public ExemploController() {
 
