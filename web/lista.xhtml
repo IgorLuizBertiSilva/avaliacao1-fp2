@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Menu</title>
+        <h:outputStylesheet name="/css/primeflex.min.css" />
+        <h:outputStylesheet name="/css/estilo.css" />
+    </h:head>
+    <h:body>
+        <p:growl id="growl" showDetail="true" />
+        <h:form id="tabela">
+            <p:menubar >
+                <p:submenu label="Tarefa" icon="pi pi-fw pi-pencil">
+                    <p:menuitem value="Listar" icon="pi pi-fw pi-align-right" />
+                    <p:menuitem value="Cadastrar" icon="pi pi-fw pi-align-left" outcome="cadastro"/>
+                </p:submenu>
+            </p:menubar>
+            <div class="card">
+
+                <p:dataTable id="tabela" var="item" value="#{exemploController.tarefas}"
+                             rowKey="#{item.codigo}" 
+                             selection="#{exemploController.tarefaSelecionada}" selectionMode="single"
+                             stripedRows="true"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord} - {endRecord} de {totalRecords} registros"
+                             rows="3"
+                             rowsPerPageTemplate="3 ,5,10"
+                             reflow="true"
+                             class="tabela">
+                    <div class="ui-fluid p-formgrid p-grid">
+
+                        <f:facet name="header">
+                            Produtos Disponiveis
+                        </f:facet>
+
+                        <p:column headerText="Códgio">
+                            <h:outputText value="#{item.codigo}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="Descrição" sortBy="#{item.descricao}">
+                            <h:outputText value="#{item.descricao}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="Data de Cadastro">
+                            <h:outputText value="#{item.dataDeCadastro}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="Data de Modificicação">
+                            <h:outputText value="#{item.dataDeModificacao}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="Status" filterBy="#{item.status}">
+                            <h:outputText value="#{item.status}"></h:outputText>
+                        </p:column>
+                        <f:facet name="footer">
+                            <div class="p-field p-md-3">
+                                <p:commandButton value="Enxcluir" action="#{exemploController.excluir()}"
+                                                 update="growl tabela" 
+                                                 styleClass="rounded-button ui-button-raised ui-button-danger" 
+                                                 icon="pi pi-trash"
+
+                                                 />
+                            </div>
+                            <div class="p-field p-md-6">
+                                <div class="p-field">
+                                    <p:commandButton value="Cancelar" action="#{exemploController.cancelar()}"
+                                                     update="growl tabela" 
+                                                     styleClass="ui-button-raised ui-button-danger" 
+                                                     icon="pi pi-bookmark"
+
+                                                     />
+                                </div>
+                                <div class="p-field">
+                                    <p:commandButton value="Finalizar" action="#{exemploController.finalizar()}"
+                                                     update="growl tabela" 
+                                                     styleClass="ui-button-raised ui-button-warning" 
+                                                     icon="pi pi-bookmark"
+
+                                                     />
+                                </div>
+
+
+                            </div>
+                        </f:facet>
+                    </div>
+                </p:dataTable>
+
+
+
+
+            </div>
+        </h:form>
+    </h:body>
+</html>
+
